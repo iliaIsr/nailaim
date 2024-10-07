@@ -7,13 +7,19 @@ import {Abibas} from "./components/pages/Abibas";
 import styles from "./components/Site.module.css";
 import {S} from './components/pages/_styles';
 import {Model} from "./components/Model";
+import {NoFind} from "./components/pages/NoFind";
 
 
 export const PATH = {
     PAGE1: '/adidas',
     PAGE2: '/puma',
     PAGE3: '/abibas',
-    MODEL: '/model'
+    // MODEL: [
+    //     {id:'/adidas/:id',model:'adidas'},
+    //     {id:'/puma/:id',model:'puma'},
+    //     {id:'/abibas/:id',model:'abibas'}
+    // ],
+    ERROR: '*',
 } as const;
 
 function App() {
@@ -34,11 +40,12 @@ function App() {
                         <Route path={PATH.PAGE1} element={<Adidas/>}/>
                         <Route path={PATH.PAGE2} element={<Puma/>}/>
                         <Route path={PATH.PAGE3} element={<Abibas/>}/>
-                        <Route path={'/adidas/:id'} element={<Model/>}/>
-{/*//*/}
+                        <Route path={PATH.ERROR} element={<Error404/>}/>
 
-                        <Route path={'/*'} element={<Error404/>}/>
-
+                        {/*{PATH.MODEL.map((path, index) => (*/}
+                        {/*    <Route key={index} path={path.id} element={<Model model={path.model}/>} />*/}
+                        {/*))}*/}
+                        <Route path={'/:model/:id'} element={<Model/>}/>
                     </Routes>
                 </div>
             </div>
