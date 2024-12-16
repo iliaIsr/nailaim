@@ -13,6 +13,7 @@ import {Puma} from "../components/pages/Puma";
 import {Abibas} from "../components/pages/Abibas";
 import {Prices} from "../components/pages/Prices";
 import { Croses} from "../components/pages/Croses";
+import {Model} from "../components/Model";
 
 
 export const PATH = {
@@ -20,6 +21,7 @@ export const PATH = {
     PUMA: '/puma',
     ABIBAS: '/abibas',
     PRACIS: '/prices',
+    MODEL: '/:model/:id',
     // MODEL: [
     //     {id:'/adidas/:id',model:'adidas'},
     //     {id:'/puma/:id',model:'puma'},
@@ -31,7 +33,7 @@ export const PATH = {
 export const router = createBrowserRouter([
         {
             path: "/",
-            element: <Croses/>,
+            element: <App/>,
             errorElement: <Error404/>,
             children: [
                 {
@@ -48,10 +50,15 @@ export const router = createBrowserRouter([
                 },
                 {
                     path: PATH.PRACIS,
-                    element: <Prices/>
+                    element: <Prices/>,
                 },
+                {
+                    path: PATH.MODEL,
+                    element: <Model/>
+                }
             ]
         },
 
     ])
 ;
+
