@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navigate, NavLink, Route, Routes, Outlet} from 'react-router-dom';
+import {Navigate, NavLink, Route, Routes, Outlet, useNavigate, Link} from 'react-router-dom';
 import {Error404} from "./components/pages/Error404";
 import {Adidas} from "./components/pages/Adidas";
 import {Puma} from "./components/pages/Puma";
@@ -17,6 +17,7 @@ export const PATH = {
     PAGE2: '/puma',
     PAGE3: '/abibas',
     PAGE4: '/prices',
+    PAGE5: '/ProtectedPage',
     // MODEL: [
     //     {id:'/adidas/:id',model:'adidas'},
     //     {id:'/puma/:id',model:'puma'},
@@ -26,6 +27,11 @@ export const PATH = {
 } as const;
 
 function App() {
+    const navigate=useNavigate()
+
+    const navigateHandler=()=>{
+        navigate(-1)
+    }
     return (
         <div>
             <div className={styles.header}><h1>HEADER</h1></div>
@@ -35,10 +41,16 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.PAGE2}>Puma</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PAGE4}>Цены для оптовиков</NavLink></S.NavWrapper>
+                    <S.NavWrapper><NavLink to={PATH.PAGE5}>Protected Page</NavLink></S.NavWrapper>
+                    {/*<S.NavWrapper><NavLink to={'/login'}>Login</NavLink></S.NavWrapper>*/}
                     <a href="page3">page3 HTML</a>
                 </div>
                 <div className={styles.content}>
-                    <Outlet />
+                    <div className={styles.HorizontalNavigation}>
+                        <NavLink className={styles.LinkLikeButton} to={PATH.PAGE1}>Home</NavLink>
+                        <button onClick={navigateHandler} className={styles.ButtonLikeLink}>Back</button>
+                    </div>
+                    <Outlet/>
 
                     {/*<Routes>*/}
                     {/*    <Route path={'/'} element={<Navigate to={'/page1'}/>}/>*/}
